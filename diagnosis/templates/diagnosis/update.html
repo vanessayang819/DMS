@@ -1,0 +1,36 @@
+{% extends 'home/base.html' %}
+
+{% block title %}UpdateDiagnosis{% endblock %}
+{% block heading %}修改诊断{% endblock %}
+{% block body %}
+
+<div class="container">
+<div class="row">
+  <form class="col s12" action='/diagnosis/do_change/' method="POST">
+    {%csrf_token%}
+    <div class="row">
+      <input type='hidden' name='id' value='{{diagnosis.pk}}'>
+      <div class="input-field col s6">
+        <input type='text' name='patient' id="patient" disabled="disabled" value='{{diagnosis.appointment.patient.name}}'>
+        <label for="patient" class="active">患者</label>
+      </div>
+      <div class="input-field col s6">
+        <input type="text" id="autocomplete-doctor" disabled="disabled" class="autocomplete-doctor" name="doctor" value='{{diagnosis.appointment.doctor.name}}'>
+        <label for="autocomplete-doctor" class="active">医生</label>
+      </div>
+      <div class="input-field col s12">
+        <input type="text"  name="description" id="description"  value='{{diagnosis.description}}' maxlength="400">
+        <label for="description" >诊断描述</label>
+      </div>
+
+      <div class="input-field col s12">
+         <label for="d_type" class="active">排序方式</label>
+          {{forms.d_type}}
+      </div>
+      <button type="submit" class="btn grey">更新</button>
+    </div>
+  </form>
+</div>
+</div>
+{% if doctors %}<div id="doctor-data" hidden>{% for doctor in doctors %}"{{doctor.name}}":null, {% endfor %}</div>{% endif %}
+{% endblock %}

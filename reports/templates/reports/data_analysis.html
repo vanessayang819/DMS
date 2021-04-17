@@ -1,0 +1,84 @@
+{% extends "home/base.html" %}
+
+{% block title %}Report{% endblock %}
+{% block heading %}报表管理{% endblock %}
+{% block body %}
+
+<div class="container">
+<h5>时间统计</h5>
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">诊断数量</th>
+      <th scope="col">总等待时间</th>
+      <th scope="col">平均等待时间</th>
+      <th scope="col">门诊患者等待时间</th>
+      <th scope="col">线上患者等待时间</th>
+    </tr>
+  </thead>
+    <tbody>
+      <tr>
+        <th scope="row">优先门诊法</th>
+        <td>{{type1}}</td>
+        <td>{{s1}}</td>
+        <td>{{a1}}</td>
+        <td>{{w1}}</td>
+        <td>{{w4}}</td>
+      </tr>
+      <tr>
+        <th scope="row">先到先看病</th>
+        <td>{{type2}}</td>
+        <td>{{s2}}</td>
+        <td>{{a2}}</td>
+        <td>{{w2}}</td>
+        <td>{{w5}}</td>
+      </tr>
+      <tr>
+        <th scope="row">间隔一定时间</th>
+        <td>{{type3}}</td>
+        <td>{{s3}}</td>
+        <td>{{a3}}</td>
+        <td>{{w3}}</td>
+        <td>{{w6}}</td>
+      </tr>
+    </tbody>
+</table>
+
+<h5>患者信息统计</h5>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">总计</th>
+      <th scope="col">男</th>
+      <th scope="col">女 </th>
+
+    </tr>
+  </thead>
+  <tbody>
+      <tr>
+        <th scope="row">门诊</th>
+        <td>{{appt1}}</td>
+        <td>{{male1}}</td>
+        <td>{{female1}}</td>
+
+
+
+      </tr>
+      <tr>
+        <th scope="row">线上</th>
+        <td>{{appt2}}</td>
+        <td>{{male2}}</td>
+        <td>{{female2}}</td>
+
+
+      </tr>
+  </tbody>
+</table>
+
+
+</div>
+
+{% endblock %}

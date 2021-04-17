@@ -1,0 +1,52 @@
+{% load static %}
+
+<html>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width">
+<link rel="shortcut icon" type="image/png" href="{% static "favicon.png" %}" />
+<link rel="stylesheet" href="{% static "css/materialize.min.css" %}"/>
+<link rel="stylesheet" href="{% static "css/style.css" %}"/>
+<script src="{% static "js/jquery-3.2.1.min.js" %}"> </script>
+<script src="{% static "js/materialize.min.js" %}"> </script>
+<script src="{% static "js/script.js" %}"> </script>
+
+<head>
+	<title>{% block title %}home{% endblock %} | DMS</title>
+</head>
+
+<body>
+	<ul id="slide-out" class="side-nav fixed">
+		<li>
+			<div class="user-view">
+				<div class="background">
+					<img src="{% static "index.png"%}"/>
+				</div>
+				<br>
+			</div>
+		</li>
+		<li><a class="waves-effect waves-grey" href="/profile">主页</a></li>
+		{% for item,url in menu.items %}
+		<li><a class="waves-effect waves-grey" href="{{url}}">{{item}}</a></li>
+		{% endfor %}
+		<li>
+			<div class="divider"></div>
+		</li>
+		<li><a class="waves-effect" href="/logout">注销</a></li>
+	</ul>
+
+	<main class="center-align">
+		<nav>
+			<div class="nav-wrapper	grey">
+				<a href="#" data-activates="slide-out" class="button-collapse"><i class="material-icons">目录</i></a>
+				<a href="#" class="brand-logo center">{% block heading %}DMS{% endblock %}</a>
+			</div>
+		</nav>
+		<div id="body">
+			{% block body %}{% endblock %}
+		</div>
+	</main>
+	<footer class="page-footer  grey ">
+	</footer>
+</body>
+
+</html>

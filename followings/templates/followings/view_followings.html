@@ -1,0 +1,59 @@
+{% extends "home/base.html" %}
+
+{% block title %}Followings{% endblock %}
+{% block heading %}随访管理{% endblock %}
+{% block body %}
+<h5>随访信息</h5>
+<a href="/followings/book/"><button type="button" class="btn">添加随访</button></a>
+<br>
+
+<div class="container">
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">患者</th>
+      <th scope="col">医生</th>
+      <th scope="col">随访时间</th>
+      <th scope="col">随访类型</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for following in page_obj.object_list %}
+      <tr>
+        <th scope="row">{{ forloop.counter}}</th>
+        <td>{{following.patient.name}} </td>
+        <td>{{following.doctor.name}}</td>
+        <td>{{following.following_time}}</td>
+        <td>{{following.get_following_type_display}}</td>
+        <td><a href="/followings/change_following/{{following.pk}}"> <button type="button" class="btn">修改</button></a></td>
+        <td><a href="/followings/delete/{{following.pk}}"><button class="btn red">删除</button></a></td>
+      </tr>
+    {% endfor%}
+  </tbody>
+</table>
+
+  <div>
+            {% if page_obj.has_previous %}
+            <a href="/followings?p={{page_obj.previous_page_number }}">上一页</a>
+            {% else %}
+               <a href="#">上一页</a>
+            {% endif %}
+
+            {% for i in page_obj.paginator.page_range %}
+            <a href="/followings?p={{ i }}">{{i}}</a>
+            {% endfor%}
+
+            {% if page_obj.has_next %}
+            <a href="/followings?p={{page_obj.next_page_number }}">下一页</a>
+            {% else %}
+               <a href="#">下一页</a>
+            {% endif %}
+        </div>
+        <span>
+            {{ page_obj.number }}/{{ page_obj.paginator.num_pages }}
+        </span>
+
+</div>
+
+{% endblock %}

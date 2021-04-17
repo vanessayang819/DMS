@@ -1,0 +1,33 @@
+{% load static %}
+
+<html>
+	<head>
+		<title>{% block title %} 登录| 选择角色{% endblock %}</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+		<link rel="stylesheet" href="{% static "css/materialize.min.css" %}">
+		<link rel="stylesheet" href="{% static "css/loginstyle.css" %}">
+		<script src="{% static "js/jquery-3.2.1.min.js" %}"></script>
+		<script src="{% static "js/materialize.min.js" %}"></script>
+		<script src="{% static "js/script.js" %}"></script>
+
+	</head>
+
+<body>
+
+
+
+<fieldset>
+   <h3>医生管理系统</h3>
+		<br>		<br>
+		<a href="/admin/login/?next=/admin/"><button class="btn">管理员登录</button></a>
+		<br>		<br>		<br>		<br>
+		<a href="/login/?next=/"><button class="btn">医生登录</button></a>
+
+</fieldset>
+
+</body>
+
+
+</html>

@@ -1,0 +1,56 @@
+{% load static %}
+
+<html>
+	<head>
+		<title>{% block title %} 登录| 医生登录{% endblock %}</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+		<link rel="stylesheet" href="{% static "css/materialize.min.css" %}">
+		<link rel="stylesheet" href="{% static "css/loginstyle.css" %}">
+		<script src="{% static "js/jquery-3.2.1.min.js" %}"></script>
+		<script src="{% static "js/materialize.min.js" %}"></script>
+		<script src="{% static "js/script.js" %}"></script>
+
+	</head>
+
+<body>
+
+<!--    <div class="container center-align">-->
+		{% if messages %}
+			{% for message in messages %}
+					<script>
+						Materialize.toast('{{ message }}', 3000);
+					</script>
+			{% endfor %}
+		{% endif %}
+
+    <fieldset>
+      <h3>医生登录</h3>
+		<div class="row">
+			<form action="/loginmodule/auth" method="POST" class="col s12">{% csrf_token %}
+				<div class="row">
+					<div class="input-field col s12">
+						<i class="material-icons prefix">account_circle</i>
+						<input type="text" name="username" id="username" class="validate">
+						<label for="username">用户名</label>
+					</div>
+					<div class="input-field col s12">
+						<i class="material-icons prefix">vpn_key</i>
+						<input type="password" name="password" class="validate" id="password">
+						<label for="password">密码</label>
+					</div>
+					<div class="input-field col s12">
+						<button type="submit" class="btn">登录</button>
+					</div>
+				</div>
+			</form>
+		</div>
+
+
+</fieldset>
+<!--</div>-->
+</body>
+
+
+</html>

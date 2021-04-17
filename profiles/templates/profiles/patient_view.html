@@ -1,0 +1,53 @@
+{% extends "home/base.html" %}
+
+{% block title %}PatientInfo{% endblock %}
+{% block heading %}患者管理{% endblock %}
+{% block body %}
+
+
+<div class="container">
+<table class="striped responsive-table">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">证件类型</th>
+      <th scope="col">姓名</th>
+      <th scope="col">性别</th>
+      <th scope="col">联系方式</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    {% for i in page_obj.object_list %}
+        <tr>
+          <th scope="row">{{ forloop.counter}}</th>
+          <td>{{i.get_IDType_display}}</td>
+          <td>{{i.name}}</td>
+          <td>{{i.get_sex_display}}</td>
+          <td>{{i.phone_number}}</td>
+        </tr>
+    {% endfor%}
+  </tbody>
+</table>
+</div>
+<ul class="pagination">
+ <li class="waves-effect"><a href="javascript:void(0)">当前页：{{ page_obj.number }} </a></li>
+{% if page_obj.has_previous %}
+  <li class="waves-effect"><a href="/profile/patient_view?p={{page_obj.previous_page_number }}">上一页</a></li>
+
+{% else %}
+  <li class="waves-effect"><a href="javascript:void(0)">上一页</a></li>
+{% endif %}
+
+{% for i in page_obj.paginator.page_range %}
+  <li class="waves-effect"><a href="/profile/patient_view?p={{ i }}">{{i}}</a></li>
+{% endfor%}
+
+{% if page_obj.has_next %}
+  <li class="waves-effect"><a href="/profile/patient_view?p={{page_obj.next_page_number }}">下一页</a></li>
+
+{% else %}
+  <li class="waves-effect"><a href="javascript:void(0)">下一页</a></li>
+{% endif %}
+</ul>
+{% endblock %}

@@ -1,0 +1,48 @@
+{% extends 'home/base.html' %}
+
+{% block title %}Update following{% endblock %}
+{% block heading %}修改随访{% endblock %}
+{% block body %}
+
+<div class="container">
+<div class="row">
+  <form class="col s12" action='/followings/do_change/' method="POST">
+    {%csrf_token%}
+    <div class="row">
+      <input type='hidden' name='id' value='{{following.pk}}'>
+      <div class="input-field col s4">
+        <input type='text' name='patient' disabled="disabled" value='{{following.patient.name}}'>
+        <label for="patient" class="active">患者</label>
+      </div>
+      <div class="input-field col s4">
+        <input type="text" id="autocomplete-doctor" disabled="disabled" class="autocomplete-doctor" name="doctor" value='{{following.doctor.name}}'>
+        <label for="autocomplete-doctor" class="active">医生</label>
+      </div>
+      <div class="input-field col s4">
+          <label for="following_type" class="active">随访类型</label>
+            {{forms.following_type}}
+      </div>
+      <div class="input-field col s6">
+        <input type="date" name='following_date' id="following_date" required>
+        <label for="following_date" class="active">日期</label>
+      </div>
+      <div class="input-field col s6">
+        <input type="time" name='following_time' min="08:00" max="17:00" required>
+        <label for="following_time" class="active">时间</label>
+      </div>
+
+
+      <div class="input-field col s12">
+        <input type="text"  name="description" id="description"  value='{{following.description}}' maxlength="400">
+        <label for="description" >诊断描述</label>
+      </div>
+
+
+
+      <button type="submit" class="btn grey">更新</button>
+    </div>
+  </form>
+</div>
+</div>
+{% if doctors %}<div id="doctor-data" hidden>{% for doctor in doctors %}"{{doctor.name}}":null, {% endfor %}</div>{% endif %}
+{% endblock %}

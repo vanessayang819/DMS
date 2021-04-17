@@ -1,0 +1,63 @@
+{% extends "home/base.html" %}
+{% block title %}Diagnosis{% endblock %}
+{% block heading %}诊断管理{% endblock %}
+
+{% block body %}
+<!--<h5>诊断信息</h5>-->
+<div class="container">
+<table class="table">
+  <thead>
+    <tr>
+        <th scope="col">#</th>
+        <th scope="col">患者</th>
+
+        <th scope="col">诊断日期</th>
+        <th scope="col">排序类型</th>
+<!--        <th scope="col">诊断描述</th>-->
+        <th scope="col">开始时间</th>
+        <th scope="col">结束时间</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for diag in page_obj.object_list %}
+      <tr>
+        <th>{{ forloop.counter}}</th>
+        <td>{{diag.appointment.patient.name}} </td>
+
+        <td>{{diag.appointment.appointment_time|date:'Y-m-d'}} </td>
+        <td>{{diag.get_d_type_display}} </td>
+<!--        <td>{{diag.description}}</td>-->
+        <td>{{diag.filed_time|date:'H:i'}}</td>
+        <td>{{diag.closed_time|date:'H:i'}}</td>
+        <td><a href="/diagnosis/change_diagnosis/{{diag.pk}}"> <button type="button" class="btn">修改</button></a></td>
+      <tr>
+    {% endfor%}
+  </tbody>
+</table>
+</div>
+
+<div>
+            {% if page_obj.has_previous %}
+            <a href="/diagnosis?p={{page_obj.previous_page_number }}">上一页</a>
+            {% else %}
+               <a href="#">上一页</a>
+            {% endif %}
+
+            {% for i in page_obj.paginator.page_range %}
+            <a href="/diagnosis?p={{ i }}">{{i}}</a>
+            {% endfor%}
+
+            {% if page_obj.has_next %}
+            <a href="/diagnosis?p={{page_obj.next_page_number }}">下一页</a>
+            {% else %}
+               <a href="#">下一页</a>
+            {% endif %}
+        </div>
+        <span>
+            {{ page_obj.number }}/{{ page_obj.paginator.num_pages }}
+        </span>
+
+</div>
+
+
+{% endblock %}

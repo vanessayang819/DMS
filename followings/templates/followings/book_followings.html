@@ -1,0 +1,60 @@
+{% extends 'home/base.html' %}
+
+{% block title %}Book following{% endblock %}
+{% block heading %}添加随访{% endblock %}
+{% block body %}
+
+<div class="row">
+  <form class="col s12" action='/followings/do_book/' method="POST">
+    {%csrf_token%}
+    <div class="row">
+      <div class="input-field col s4">
+        <select name="doctor" id="doctor" class="validate" required>
+          {% for doctor in doctors %}
+            <option value='{{doctor.name}}'>{{doctor.name}}</option>
+          {% endfor %}
+        </select>
+        <label for="patient" >医生</label>
+      </div>
+
+      <div class="input-field col s4">
+        <select name="patient" id="patient" class="validate" required>
+          {% for patient in patients %}
+            <option value='{{patient.name}}'>{{patient.name}}</option>
+          {% endfor %}
+        </select>
+        <label for="patient" >患者</label>
+      </div>
+
+      <div class="input-field col s4">
+          <label for="following_type" class="active">随访类型</label>
+            {{forms.following_type}}
+      </div>
+
+      <div class="input-field col s6">
+        <input type="date" name='following_date' id="following_date" required>
+        <label for="following_date" class="active">日期</label>
+      </div>
+
+
+      <div class="input-field col s6">
+        <input type="time" name='following_time' min="08:00" max="20:00" required>
+        <label for="following_time" class="active">时间</label>
+      </div>
+
+      <div class="input-field col s12">
+        <textarea name="description" id="description" class="materialize-textarea" required maxlength="400"></textarea>
+        <label for="description" >随访描述</label>
+      </div>
+
+
+      <button type="submit" class="btn">提交随访</button>
+
+    </div>
+  </form>
+</div>
+
+{% if patients %}<div id="patient-data" hidden>{% for patient in patients %}"{{patient.name}}":null, {% endfor %}</div>{% endif %}
+{% if doctors %}<div id="doctor-data" hidden>{% for doctor in doctors %}"{{doctor.name}}":null, {% endfor %}</div>{% endif %}
+
+{% endblock %}

@@ -1,0 +1,56 @@
+{% extends 'home/base.html' %}
+{% block title %}GenerateDiag{% endblock %}
+{% block heading %}添加诊断{% endblock %}
+
+{% block body %}
+
+<div class="container">
+<div class="row">
+
+  <form class="col s12" action='/diagnosis/do_generate/' method="POST">
+    {%csrf_token%}
+    <div class="row">
+      <input type='hidden' name='appointment_id' value='{{appointment.pk}}'>
+
+      <div class="input-field col s12">
+        <input type='text' name='patient' id='patient' disabled="disabled" value='{{appointment.patient.name}}' required>
+        <label for="patient" class="active">患者</label>
+      </div>
+
+
+      <div class="input-field col s6">
+        <input type="date" name='filed_date' id="filed_date" required>
+        <label for="filed_date" class="active">诊断开始日期</label>
+      </div>
+
+      <div class="input-field col s6">
+        <input type="time" name='filed_time' id='filed_time' min="08:00" max="18:00" required>
+        <label for="filed_time" class="active">诊断开始时间</label>
+      </div>
+
+      <div class="input-field col s6">
+        <input type="date" name='closed_date' id="closed_date" required>
+        <label for="closed_date" class="active">结束日期</label>
+      </div>
+
+      <div class="input-field col s6">
+        <input type="time" name='closed_time' id='closed_time'min="08:00" max="20:00" required>
+        <label for="closed_time" class="active">结束时间</label>
+      </div>
+
+
+      <div class="input-field col s12">
+        <textarea name="description" id="description" class="materialize-textarea" maxlength="400" required></textarea>
+        <label for="description" >诊断描述</label>
+      </div>
+      <div class="input-field col s6">
+         <label for="d_type" class="active">排序方式</label>
+          {{forms.d_type}}
+      </div>
+
+      <button type="submit" class="btn">添加诊断</button>
+    </div>
+  </form>
+</div>
+</div>
+{% endblock %}

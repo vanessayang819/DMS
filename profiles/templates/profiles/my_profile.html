@@ -1,0 +1,25 @@
+{% extends "home/base.html" %}
+
+{% block title %}Information{% endblock %}
+{% block heading %}个人信息{% endblock %}
+{% block body %}
+<div class="container">
+  <ul class="collection with-header left-align">
+    <li class="collection-item">用户名<span class="secondary-content black-text">{{request.user.username}}</span></li>
+    <li class="collection-item">姓名<span class="secondary-content black-text">{{request.user.doctor.name}}</span></li>
+    <li class="collection-item">联系方式<span class="secondary-content black-text">{{request.user.doctor.phone_number}}</span></li>
+    <li class="collection-item">地址<span class="secondary-content black-text">{{request.user.doctor.address}}</span></li>
+    <li class="collection-item">部门<span class="secondary-content black-text">{{request.user.doctor.get_departmentID_display}}</span></li>
+    <li class="collection-item">id<span class="secondary-content black-text">{{request.user.id}}</span></li>
+  </ul>
+
+  <a href="/profile/change_profile/{{request.user.doctor.pk}}"> <button type="button" class="btn">修改</button></a>
+</div>
+
+
+
+
+
+
+
+{% endblock %}

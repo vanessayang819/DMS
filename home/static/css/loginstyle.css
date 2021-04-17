@@ -1,0 +1,25 @@
+body {
+  background-image: url("../1.png");
+  background-position: center 0;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+  -webkit-background-size: cover;
+  -o-background-size: cover;
+  -moz-background-size: cover;
+  -ms-background-size: cover;
+}
+
+fieldset{
+text-align: center;
+width:350px;
+height:350px;
+background:rgba(256,256,256,0.7);
+border:0px;
+margin: auto;
+position: absolute;
+top: 0;
+left: 0;
+right: 0;
+bottom: 0;
+}
